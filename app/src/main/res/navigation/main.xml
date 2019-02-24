@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/main"
+            app:startDestination="@id/topHeadline">
+
+    <fragment android:id="@+id/topHeadline" android:name="com.example.whatsnews.ui.TopHeadline"
+              android:label="top_headline_fragment" tools:layout="@layout/top_headline_fragment"/>
+</navigation>
