@@ -2,4 +2,8 @@
     <string name="app_name">WhatsNews</string>
     <string name="API_KEY">548a48ee94b3421a900177a1de1dad7d</string>
     <string name="BASE_URL">https://newsapi.org/</string>
+    <string name="DemoContent">Antalya\'da yaya geçidinden yolun karşısına geçmeye çalışan öğretmen Burhanettin Şirin\'e (52), ambulans çarptı. Çarpmanın etkisiyle 70 metre savrulan Şirin hayatını kaybetti.
+
+    </string>
+    <string name="DemoTitle">Antalya\'nın Konyaaltı ilçesinde ambulansın çarptığı yaya hayatını kaybetti.</string>
 </resources>

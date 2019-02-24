@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+    <com.google.android.material.card.MaterialCardView
+            android:layout_margin="15dp"
+            app:cardBackgroundColor="@android:color/white"
+            app:cardCornerRadius="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:paddingBottom="4dp"
+                android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/adapter_item_image"
+                    android:src="@drawable/alla"
+                    android:scaleType="fitXY"
+                    android:layout_width="match_parent"
+                    android:layout_height="210dp"/>
+
+            <LinearLayout
+                    android:layout_below="@+id/adapter_item_image"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:text="@string/DemoTitle"
+                        android:id="@+id/adapter_item_title"
+                        android:paddingLeft="9dp"
+                        android:paddingTop="9dp"
+                        android:textSize="21dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                />
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:text="@string/DemoContent"
+                        android:id="@+id/adapter_item_content"
+                        android:paddingLeft="9dp"
+                        android:paddingTop="9dp"
+                        android:textSize="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                />
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="7dp"
+                        android:background="@android:color/black"
+                        android:layout_height="0.9dp"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/adapter_item_author"
+                        android:layout_width="match_parent"
+                        android:paddingLeft="9dp"
+                        android:text="Hurriyet.com"
+                        android:layout_height="wrap_content"
+                />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

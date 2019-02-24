@@ -6,10 +6,7 @@
         android:layout_height="match_parent"
         tools:context=".ui.TopHeadline">
 
-    <TextView
-            android:layout_width="match_parent"
-            android:id="@+id/textView"
-            android:layout_height="match_parent"
-            android:text="Hello"/>
-
+    <androidx.recyclerview.widget.RecyclerView android:layout_width="match_parent"
+                                               android:id="@+id/recyclerView"
+                                               android:layout_height="match_parent"/>
 </FrameLayout>
