@@ -30,6 +30,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    kapt {
+        generateStubs = true
+    }
 
 }
 
@@ -51,9 +54,8 @@ dependencies {
     implementation deps.dagger.android
     implementation deps.dagger.android_support
     implementation deps.constraint_layout
-
     implementation deps.timber
-
+    kapt "com.android.databinding:compiler:3.5.0-alpha05"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
