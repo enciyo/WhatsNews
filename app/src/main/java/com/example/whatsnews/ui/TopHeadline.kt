@@ -48,6 +48,7 @@ class TopHeadline : Fragment() {
     private fun initView(data: List<Article>) {
         adapter= Adapter(mutableListOf())
         adapter.addData(data)
+
         val lmanager= LinearLayoutManager(view!!.context,RecyclerView.VERTICAL,false)
         val recyclerView:RecyclerView = view!!.findViewById(R.id.recyclerView)
         recyclerView.layoutManager=lmanager
