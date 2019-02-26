@@ -1,4 +1,4 @@
-package com.example.whatsnews
+package com.example.whatsnews.adapters
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,13 +8,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.whatsnews.databinding.ItemTopheadBinding
+import com.example.whatsnews.R
 import com.example.whatsnews.model.Article
 import kotlinx.android.synthetic.main.item_tophead.view.*
 
 
 
-class Adapter(val data:MutableList<Article>) : RecyclerView.Adapter<Adapter.ViewHolder>() {
+class TopHeadlinesAdapter(val data:MutableList<Article>) : RecyclerView.Adapter<TopHeadlinesAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_tophead,parent,false))
     }

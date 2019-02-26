@@ -10,12 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.whatsnews.R
 import com.example.whatsnews.databinding.ItemEverythingBinding
-import com.example.whatsnews.databinding.ItemTopheadBinding
 import com.example.whatsnews.model.Article
 import kotlinx.android.synthetic.main.item_tophead.view.*
 
 
-class Adapter2(val data:MutableList<Article>) : RecyclerView.Adapter<Adapter2.ViewHolder>() {
+class EverythingAdapter(val data:MutableList<Article>) : RecyclerView.Adapter<EverythingAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_everything,parent,false))
     }

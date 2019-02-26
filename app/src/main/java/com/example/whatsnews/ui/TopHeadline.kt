@@ -1,7 +1,6 @@
 package com.example.whatsnews.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,15 +9,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.whatsnews.Adapter
-import com.example.whatsnews.App
+import com.example.whatsnews.adapters.TopHeadlinesAdapter
 import com.example.whatsnews.R
-import com.example.whatsnews.adapters.Adapter2
+import com.example.whatsnews.adapters.EverythingAdapter
 import com.example.whatsnews.di.Injectable
 import com.example.whatsnews.model.Article
 import com.example.whatsnews.util.Ext
 import com.example.whatsnews.viewmodel.WhatsNewsViewModelFactory
-import kotlinx.android.synthetic.main.top_headline_fragment.*
 import javax.inject.Inject
 
 class TopHeadline : Fragment(),Injectable{
@@ -28,8 +25,8 @@ class TopHeadline : Fragment(),Injectable{
 
     private lateinit var viewModel: TopHeadlineViewModel
 
-    lateinit var adapter: Adapter
-    lateinit var adapter2: Adapter2
+    lateinit var topHeadlinesAdapter: TopHeadlinesAdapter
+    lateinit var everythingAdapter: EverythingAdapter
 
 
     override fun onCreateView(
@@ -50,7 +47,7 @@ class TopHeadline : Fragment(),Injectable{
 
         viewModel.getEverything.observe(this, Observer {
             if(it.data!=null){
-               adapter2.addData(it.data!!.articles)
+               everythingAdapter.addData(it.data!!.articles)
             }
         })
 
@@ -59,23 +56,23 @@ class TopHeadline : Fragment(),Injectable{
     }
 
     fun setupRecyclerViewAndAdapter() {
-        adapter= Adapter(mutableListOf())
-        adapter2= Adapter2(mutableListOf())
+        topHeadlinesAdapter= TopHeadlinesAdapter(mutableListOf())
+        everythingAdapter= EverythingAdapter(mutableListOf())
         val lmanager= LinearLayoutManager(view!!.context,RecyclerView.HORIZONTAL,false)
         val lmanager2= LinearLayoutManager(view!!.context,RecyclerView.VERTICAL,false)
         val recyclerView:RecyclerView = view!!.findViewById(R.id.recyclerView)
         val recylerView2:RecyclerView = view!!.findViewById(R.id.recylerView2)
         recyclerView.layoutManager=lmanager
-        recyclerView.adapter=adapter
+        recyclerView.adapter=topHeadlinesAdapter
         recylerView2.layoutManager=lmanager2
-        recylerView2.adapter=adapter2
+        recylerView2.adapter=everythingAdapter
 
 
     }
 
     private fun initView(data: List<Article>) {
         Ext.i(data.toString())
-        adapter.addData(data)
+        topHeadlinesAdapter.addData(data)
 
     }
 
