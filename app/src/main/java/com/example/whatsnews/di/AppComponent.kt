@@ -1,22 +1,24 @@
 package com.example.whatsnews.di
 
-import android.content.Context
+import android.app.Application
 import com.example.whatsnews.App
 import com.example.whatsnews.ui.TopHeadline
 import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjectionModule
 import javax.inject.Singleton
 
-@Component(modules = [AppModule::class])
 @Singleton
+@Component(modules = [AndroidInjectionModule::class,
+    AppModule::class,
+    MainActivityModule::class])
 interface AppComponent  {
     @Component.Builder
-    interface Builder{
+    interface Builder {
         @BindsInstance
-        fun application(context: Context) : Builder
-        fun build() : AppComponent
-    }
+        fun application(application: Application): Builder
 
-    fun inject(app:App)
-    fun inject(topHeadline: TopHeadline)
+        fun build(): AppComponent
+    }
+    fun inject(app: App)
 }

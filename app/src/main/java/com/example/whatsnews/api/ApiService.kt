@@ -9,4 +9,5 @@ interface ApiService{
     @GET(" v2/top-headlines")
     fun getTopHeadlines(@Query("apiKey") apiKey:String,
                         @Query("country") country:String) : LiveData<ApiResponse<BaseRoot>>
+
 }

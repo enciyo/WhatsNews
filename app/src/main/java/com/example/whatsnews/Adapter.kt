@@ -1,10 +1,11 @@
 package com.example.whatsnews
 
-import android.text.Layout
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.whatsnews.databinding.ItemTopheadBinding
@@ -36,6 +37,11 @@ class Adapter(val data:MutableList<Article>) : RecyclerView.Adapter<Adapter.View
             binding= DataBindingUtil.bind(itemView)!!
             binding.article=article
             Glide.with(itemView).load(article.urlToImage).into(itemView.itemView)
+            itemView.setOnClickListener {
+                var bundle = Bundle()
+                bundle.putString("url",article.url)
+                Navigation.findNavController(itemView).navigate(R.id.toWebView,bundle)
+            }
         }
     }
 }

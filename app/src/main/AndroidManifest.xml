@@ -11,6 +11,8 @@
         android:name=".App"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data android:name="android.webkit.WebView.EnableSafeBrowsing"
+                   android:value="false" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
