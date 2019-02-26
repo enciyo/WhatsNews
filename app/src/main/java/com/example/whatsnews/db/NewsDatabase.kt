@@ -2,9 +2,12 @@ package com.example.whatsnews.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.whatsnews.model.BaseRoot
+import com.example.whatsnews.model.EverythingModel
+import com.example.whatsnews.model.TopHeadlineModel
+import com.example.whatsnews.repository.EverythingRepository
 
-@Database(entities = [BaseRoot::class],version = 1,exportSchema = false)
+@Database(entities = [TopHeadlineModel::class,EverythingModel::class],version = 12,exportSchema = false)
 abstract class NewsDatabase : RoomDatabase(){
     abstract fun newsDao() : NewsDao
+    abstract fun everythingDao() : EverythingDao
 }

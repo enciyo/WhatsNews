@@ -3,6 +3,7 @@ package com.example.whatsnews.di
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
@@ -14,12 +15,15 @@ import dagger.android.support.HasSupportFragmentInjector
 
 object AppInjector {
     fun init(app: App) {
+
         DaggerAppComponent.builder().application(app)
             .build().inject(app)
+
         app
             .registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
                 override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
                     handleActivity(activity)
+                    Log.i("MyLogger","onActivityCreated")
                 }
 
                 override fun onActivityStarted(activity: Activity) {
@@ -62,6 +66,7 @@ object AppInjector {
                             savedInstanceState: Bundle?
                         ) {
                             if (f is Injectable) {
+                                Log.i("MyLogger","Injected")
                                 AndroidSupportInjection.inject(f)
                             }
                         }

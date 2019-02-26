@@ -1,4 +1,4 @@
-package com.example.whatsnews
+package com.example.whatsnews.adapters
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,15 +8,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.whatsnews.R
+import com.example.whatsnews.databinding.ItemEverythingBinding
 import com.example.whatsnews.databinding.ItemTopheadBinding
 import com.example.whatsnews.model.Article
 import kotlinx.android.synthetic.main.item_tophead.view.*
 
 
-
-class Adapter(val data:MutableList<Article>) : RecyclerView.Adapter<Adapter.ViewHolder>() {
+class Adapter2(val data:MutableList<Article>) : RecyclerView.Adapter<Adapter2.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_tophead,parent,false))
+        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_everything,parent,false))
     }
 
     override fun getItemCount(): Int {
@@ -32,10 +33,10 @@ class Adapter(val data:MutableList<Article>) : RecyclerView.Adapter<Adapter.View
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        lateinit var binding: com.example.whatsnews.databinding.ItemTopheadBinding
+        lateinit var binding: ItemEverythingBinding
         fun initView(article: Article) {
             binding= DataBindingUtil.bind(itemView)!!
-            binding.article=article
+            binding.post=article
             Glide.with(itemView).load(article.urlToImage).into(itemView.itemView)
             itemView.setOnClickListener {
                 var bundle = Bundle()

@@ -9,7 +9,9 @@ import com.example.whatsnews.api.ApiEmptyResponse
 import com.example.whatsnews.api.ApiErrorResponse
 import com.example.whatsnews.api.ApiResponse
 import com.example.whatsnews.api.ApiSuccessResponse
+import com.example.whatsnews.util.Ext
 import com.example.whatsnews.vo.Resource
+import timber.log.Timber
 import javax.xml.transform.Result
 
 abstract class NetworkBoundResource<ResultType, RequestType> {
@@ -24,6 +26,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
                 fetchDataFromNetwork(dbSource)
             }else {
                 result.addSource(dbSource){newData->
+                    Ext.i("LoadFromDb")
                     setValue(Resource.succes(newData))
                 }
             }
@@ -41,18 +44,22 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
             result.removeSource(dbSource)
             when(response){
                 is ApiSuccessResponse -> {
+                    Ext.i("ApiSuccesResponse")
+                    Ext.i(response.body.toString())
                     saveResult(response.body)
                     result.addSource(loadFromDb()){
                         Resource.succes(it)
                     }
                 }
                 is ApiEmptyResponse -> {
+                    Ext.i("ApiEmptyResponse")
                     result.addSource(loadFromDb()){
                         Resource.succes(it)
                     }
                 }
 
                 is ApiErrorResponse -> {
+                    Ext.i("ApiErrorResponse")
                     onFetchFailed()
                     result.addSource(dbSource){
                         Resource.error(response.msg,it)

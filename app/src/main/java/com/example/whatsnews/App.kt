@@ -3,6 +3,7 @@ package com.example.whatsnews
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
+import android.util.Log
 import com.example.whatsnews.di.AppComponent
 import com.example.whatsnews.di.AppInjector
 import com.example.whatsnews.di.DaggerAppComponent
@@ -26,6 +27,7 @@ class App : Application(), HasActivityInjector {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
+        Log.i("MyLogger","App")
         AppInjector.init(this)
     }
 

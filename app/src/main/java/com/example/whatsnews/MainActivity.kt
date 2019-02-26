@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity(),HasSupportFragmentInjector{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        supportActionBar!!.title="Top Headlines"
+        supportActionBar!!.title="WhatsNews"
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         NavigationUI.setupWithNavController(toolbar,Navigation.findNavController(this,R.id.my_nav_host))
 

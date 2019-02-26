@@ -5,7 +5,7 @@
             app:startDestination="@id/topHeadline">
 
     <fragment android:id="@+id/topHeadline" android:name="com.example.whatsnews.ui.TopHeadline"
-              android:label="Top Headlines" tools:layout="@layout/top_headline_fragment">
+              android:label="WhatsNews" tools:layout="@layout/top_headline_fragment">
         <action android:id="@+id/toWebView" app:destination="@id/webView"/>
     </fragment>
     <fragment android:id="@+id/webView" android:name="com.example.whatsnews.ui.webview.WebView"

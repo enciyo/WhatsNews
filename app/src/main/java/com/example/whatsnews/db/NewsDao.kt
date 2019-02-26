@@ -1,22 +1,20 @@
 package com.example.whatsnews.db
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
-import com.example.whatsnews.model.BaseRoot
+import androidx.room.*
+import com.example.whatsnews.model.EverythingModel
+import com.example.whatsnews.model.TopHeadlineModel
 
 @Dao
 interface NewsDao{
 
     @Query("SELECT * FROM News")
-    fun getTopHeadlines() : LiveData<BaseRoot>
+    fun getTopHeadlines() : LiveData<TopHeadlineModel>
 
     @Insert
-    fun insert(data:BaseRoot)
+    fun insert(data:TopHeadlineModel)
 
     @Update
-    fun update(data:BaseRoot)
+    fun update(data:TopHeadlineModel)
 
 }

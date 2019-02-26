@@ -3,7 +3,6 @@ package com.example.whatsnews.db.converters
 import androidx.room.TypeConverter
 import com.example.whatsnews.model.Article
 import com.google.gson.reflect.TypeToken
-import java.util.Collections.emptyList
 import com.google.gson.Gson
 import java.util.*
 

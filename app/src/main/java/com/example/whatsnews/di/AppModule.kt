@@ -2,7 +2,10 @@ package com.example.whatsnews.di
 
 import android.app.Application
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.whatsnews.api.ApiService
+import com.example.whatsnews.db.EverythingDao
 import com.example.whatsnews.db.NewsDao
 import com.example.whatsnews.db.NewsDatabase
 import com.example.whatsnews.vo.LiveDataCallAdapterFactory
@@ -32,7 +35,7 @@ class AppModule {
         return Room.databaseBuilder(
             application,
             NewsDatabase::class.java,
-            "newsdatabase")
+            "blaa")
             .fallbackToDestructiveMigration()
             .allowMainThreadQueries()
             .build()
@@ -44,5 +47,13 @@ class AppModule {
     fun provideDao(db:NewsDatabase) : NewsDao{
         return db.newsDao()
     }
+
+    @Singleton
+    @Provides
+    fun provideEverythingDao(db:NewsDatabase) : EverythingDao{
+        return db.everythingDao()
+    }
+
+
 
 }
