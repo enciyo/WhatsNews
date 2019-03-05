@@ -5,13 +5,12 @@
         android:layout_width="match_parent"
         android:background="#f1f5f1"
         android:layout_height="wrap_content"
-        tools:context=".ui.TopHeadline" tools:ignore="ScrollViewCount">
+        tools:context=".ui.topheadline.TopHeadline" tools:ignore="ScrollViewCount">
 
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
         <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:id="@+id/recyclerView"
@@ -23,7 +22,7 @@
                 android:textSize="19dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-        
+
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recylerView2"

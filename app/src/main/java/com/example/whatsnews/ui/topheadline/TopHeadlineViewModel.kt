@@ -1,4 +1,4 @@
-package com.example.whatsnews.ui
+package com.example.whatsnews.ui.topheadline
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel;

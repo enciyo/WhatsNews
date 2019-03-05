@@ -4,9 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
 import android.util.Log
-import com.example.whatsnews.di.AppComponent
 import com.example.whatsnews.di.AppInjector
-import com.example.whatsnews.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector

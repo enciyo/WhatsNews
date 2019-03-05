@@ -2,7 +2,6 @@ package com.example.whatsnews.di
 
 import android.app.Application
 import com.example.whatsnews.App
-import com.example.whatsnews.ui.TopHeadline
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule

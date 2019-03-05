@@ -2,7 +2,7 @@ package com.example.whatsnews.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.whatsnews.ui.TopHeadlineViewModel
+import com.example.whatsnews.ui.topheadline.TopHeadlineViewModel
 import com.example.whatsnews.viewmodel.WhatsNewsViewModelFactory
 import dagger.Binds
 import dagger.Module

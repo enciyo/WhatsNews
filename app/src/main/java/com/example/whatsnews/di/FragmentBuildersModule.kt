@@ -1,6 +1,6 @@
 package com.example.whatsnews.di
 
-import com.example.whatsnews.ui.TopHeadline
+import com.example.whatsnews.ui.topheadline.TopHeadline
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
