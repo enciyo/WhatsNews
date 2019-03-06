@@ -1,6 +1,7 @@
 package com.example.whatsnews.db
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.example.whatsnews.model.EverythingModel
 import com.example.whatsnews.model.TopHeadlineModel

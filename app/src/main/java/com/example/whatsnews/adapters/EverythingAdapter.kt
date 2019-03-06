@@ -2,21 +2,26 @@ package com.example.whatsnews.adapters
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.library.baseAdapters.BR
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.whatsnews.R
 import com.example.whatsnews.databinding.ItemEverythingBinding
 import com.example.whatsnews.model.Article
+import kotlinx.android.synthetic.main.item_everything.view.*
 import kotlinx.android.synthetic.main.item_tophead.view.*
 
 
 class EverythingAdapter(val data:MutableList<Article>) : RecyclerView.Adapter<EverythingAdapter.ViewHolder>() {
+
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_everything,parent,false))
+        val binding :ItemEverythingBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context),R.layout.item_everything,parent,false)
+        return ViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -25,18 +30,20 @@ class EverythingAdapter(val data:MutableList<Article>) : RecyclerView.Adapter<Ev
     fun addData(list: List<Article>) {
         data.addAll(list)
         notifyItemRangeInserted(list.size - list.size - 1, list.size)
+        notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.initView(data[position])
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        lateinit var binding: ItemEverythingBinding
+    inner class ViewHolder(val binding: ItemEverythingBinding) : RecyclerView.ViewHolder(binding.root){
+
         fun initView(article: Article) {
-            binding= DataBindingUtil.bind(itemView)!!
             binding.post=article
-            Glide.with(itemView).load(article.urlToImage).into(itemView.itemView)
+            binding.setVariable(BR.post,article)
+            binding.executePendingBindings()
+            Glide.with(itemView).load(article.urlToImage).into(itemView.itemView2)
             itemView.setOnClickListener {
                 var bundle = Bundle()
                 bundle.putString("url",article.url)

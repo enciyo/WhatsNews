@@ -7,7 +7,7 @@ object Ext {
     val API_KEY = "548a48ee94b3421a900177a1de1dad7d"
 
     fun i(msg:String){
-        Timber.i("MyLog" + msg.toString() )
+        Timber.i("MyLog:\t" + msg.toString() )
     }
 
 }

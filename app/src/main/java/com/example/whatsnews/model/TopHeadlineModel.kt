@@ -1,5 +1,8 @@
 package com.example.whatsnews.model
 
+import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.whatsnews.db.converters.ArticleConverter
 
@@ -8,8 +11,9 @@ import com.example.whatsnews.db.converters.ArticleConverter
 @TypeConverters(ArticleConverter::class)
 data class TopHeadlineModel(
     @PrimaryKey(autoGenerate = true)
-    val pKey: Int = 0,
-    val articles: List<Article>,
-    val status: String,
-    val totalResults: Int
-)
+    var pKey: Int = 0,
+    @get:Bindable
+    var articles:List<Article>,
+    var status: String,
+    var totalResults: Int
+): BaseObservable()

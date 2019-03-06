@@ -5,6 +5,8 @@ import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import com.example.whatsnews.AppExecutors
 import com.example.whatsnews.api.ApiEmptyResponse
 import com.example.whatsnews.api.ApiErrorResponse
 import com.example.whatsnews.api.ApiResponse
@@ -14,18 +16,19 @@ import com.example.whatsnews.vo.Resource
 import timber.log.Timber
 import javax.xml.transform.Result
 
-abstract class NetworkBoundResource<ResultType, RequestType> {
+abstract class NetworkBoundResource<ResultType, RequestType>
+@MainThread constructor(private val appExecutors: AppExecutors) {
 
     var result = MediatorLiveData<Resource<ResultType>>()
 
     init {
         val dbSource = loadFromDb()
-        result.addSource(dbSource){data->
+        result.addSource(dbSource) { data ->
             result.removeSource(dbSource)
-            if (shouldFetch(data)){
+            if (shouldFetch(data)) {
                 fetchDataFromNetwork(dbSource)
-            }else {
-                result.addSource(dbSource){newData->
+            } else {
+                result.addSource(dbSource) { newData ->
                     Ext.i("LoadFromDb")
                     setValue(Resource.succes(newData))
                 }
@@ -34,26 +37,32 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
 
     }
 
-    private fun fetchDataFromNetwork(dbSource:LiveData<ResultType>){
-        val apiResponse= createCall()
-        result.addSource(dbSource){data->
+    private fun fetchDataFromNetwork(dbSource: LiveData<ResultType>) {
+        val apiResponse = createCall()
+        result.addSource(dbSource) { data ->
             setValue(Resource.loading(data))
         }
-        result.addSource(apiResponse){response->
+        result.addSource(apiResponse) { response ->
             result.removeSource(apiResponse)
             result.removeSource(dbSource)
-            when(response){
+            when (response) {
                 is ApiSuccessResponse -> {
-                    Ext.i("ApiSuccesResponse")
-                    Ext.i(response.body.toString())
-                    saveResult(response.body)
-                    result.addSource(loadFromDb()){
-                        Resource.succes(it)
+                    appExecutors.diskIO().execute {
+                        Ext.i(response.body.toString())
+                        saveResult(response.body)
+                        appExecutors.mainThread().execute {
+                            result.addSource(loadFromDb()) {
+                                Resource.succes(it)
+                            }
+
+                        }
                     }
+
+
                 }
                 is ApiEmptyResponse -> {
                     Ext.i("ApiEmptyResponse")
-                    result.addSource(loadFromDb()){
+                    result.addSource(loadFromDb()) {
                         Resource.succes(it)
                     }
                 }
@@ -61,8 +70,8 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
                 is ApiErrorResponse -> {
                     Ext.i("ApiErrorResponse")
                     onFetchFailed()
-                    result.addSource(dbSource){
-                        Resource.error(response.msg,it)
+                    result.addSource(dbSource) {
+                        Resource.error(response.msg, it)
                     }
                 }
             }
@@ -79,7 +88,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
     }
 
 
-    fun asLiveData() = result as LiveData<Resource<ResultType>>
+    fun asLiveData() = result as MutableLiveData<Resource<ResultType>>
     protected open fun onFetchFailed() {}
 
     @MainThread
@@ -89,9 +98,9 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
     protected abstract fun saveResult(data: RequestType)
 
     @MainThread
-    protected abstract fun shouldFetch(data: ResultType?) : Boolean
+    protected abstract fun shouldFetch(data: ResultType?): Boolean
 
     @MainThread
-    protected abstract fun loadFromDb() : LiveData<ResultType>
+    protected abstract fun loadFromDb(): LiveData<ResultType>
 
 }
