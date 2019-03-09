@@ -2,13 +2,14 @@ package com.example.whatsnews.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.example.whatsnews.AppExecutors
-import com.example.whatsnews.adapters.DataChanged
 import com.example.whatsnews.api.ApiResponse
 import com.example.whatsnews.api.ApiService
 import com.example.whatsnews.db.NewsDao
 import com.example.whatsnews.model.TopHeadlineModel
 import com.example.whatsnews.util.Ext
+import com.example.whatsnews.vo.AbsentLiveData
 import com.example.whatsnews.vo.RateLimiter
 import com.example.whatsnews.vo.Resource
 import java.util.concurrent.TimeUnit
@@ -17,19 +18,21 @@ import javax.inject.Singleton
 
 @Singleton
 class TopHeadlineRepository
-@Inject constructor(private val service: ApiService,private val dao: NewsDao,private val appExecutors: AppExecutors)
-{
+@Inject constructor(private val service: ApiService, private val dao: NewsDao, private val appExecutors: AppExecutors) {
 
-    private val rateLimiter =RateLimiter<String>(3,TimeUnit.SECONDS)
+    private val rateLimiter = RateLimiter<String>(3, TimeUnit.SECONDS)
 
-    fun getTopHeadlines() : MutableLiveData<Resource<TopHeadlineModel>> {
-        return object : NetworkBoundResource<TopHeadlineModel,TopHeadlineModel>(appExecutors) {
+    fun getTopHeadlines(): LiveData<Resource<TopHeadlineModel>> {
+        return object : NetworkBoundResource<TopHeadlineModel, TopHeadlineModel>(appExecutors) {
             override fun saveResult(data: TopHeadlineModel) {
-                dao.insert(data)
+                appExecutors.diskIO().execute {
+                    Ext.i("Saved")
+                    dao.insert(data)
+                }
             }
 
             override fun shouldFetch(data: TopHeadlineModel?): Boolean {
-               return data==null || rateLimiter.shouldFetch(data.status)
+                return data == null || rateLimiter.shouldFetch(data.status)
             }
 
             override fun loadFromDb(): LiveData<TopHeadlineModel> {
@@ -37,7 +40,7 @@ class TopHeadlineRepository
             }
 
             override fun createCall(): LiveData<ApiResponse<TopHeadlineModel>> {
-                return service.getTopHeadlines(Ext.API_KEY,"tr")
+                return service.getTopHeadlines(Ext.API_KEY, "tr")
             }
 
         }.asLiveData()

@@ -6,8 +6,10 @@ import com.example.whatsnews.model.EverythingModel
 import com.example.whatsnews.model.TopHeadlineModel
 import com.example.whatsnews.repository.EverythingRepository
 
-@Database(entities = [TopHeadlineModel::class,EverythingModel::class],version = 20,exportSchema = false)
+@Database(entities = [TopHeadlineModel::class,EverythingModel::class],version = 48,exportSchema = false)
 abstract class NewsDatabase : RoomDatabase(){
+
     abstract fun newsDao() : NewsDao
     abstract fun everythingDao() : EverythingDao
+
 }

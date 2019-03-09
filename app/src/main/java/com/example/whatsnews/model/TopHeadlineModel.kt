@@ -3,6 +3,7 @@ package com.example.whatsnews.model
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.example.whatsnews.db.converters.ArticleConverter
 

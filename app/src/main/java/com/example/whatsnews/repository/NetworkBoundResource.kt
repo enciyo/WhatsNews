@@ -22,6 +22,7 @@ abstract class NetworkBoundResource<ResultType, RequestType>
     var result = MediatorLiveData<Resource<ResultType>>()
 
     init {
+        result.value = Resource.loading(null)
         val dbSource = loadFromDb()
         result.addSource(dbSource) { data ->
             result.removeSource(dbSource)
@@ -52,7 +53,7 @@ abstract class NetworkBoundResource<ResultType, RequestType>
                         saveResult(response.body)
                         appExecutors.mainThread().execute {
                             result.addSource(loadFromDb()) {
-                                Resource.succes(it)
+                                setValue(Resource.succes(it))
                             }
 
                         }
@@ -83,13 +84,14 @@ abstract class NetworkBoundResource<ResultType, RequestType>
     @MainThread
     private fun setValue(newValue: Resource<ResultType>) {
         if (result.value != newValue) {
-            result.value = newValue
+            result.postValue(newValue)
         }
     }
 
 
     fun asLiveData() = result as MutableLiveData<Resource<ResultType>>
     protected open fun onFetchFailed() {}
+
 
     @MainThread
     protected abstract fun createCall(): LiveData<ApiResponse<RequestType>>

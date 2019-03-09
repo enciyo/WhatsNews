@@ -1,6 +1,8 @@
 package com.example.whatsnews.vo
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 
 class AbsentLiveData<T : Any?> private constructor(): LiveData<T>() {
     init {

@@ -1,6 +1,7 @@
 package com.example.whatsnews.model
 
 import androidx.room.Embedded
+import androidx.room.Ignore
 
 
 data class Article(
@@ -8,7 +9,7 @@ data class Article(
     val content: String = " ",
     val description: String = " ",
     val publishedAt: String = " ",
-    @Embedded
+    @Ignore
     val source: Source,
     val title: String = " ",
     val url: String = " ",

@@ -11,10 +11,12 @@ import com.bumptech.glide.Glide
 import com.example.whatsnews.R
 import com.example.whatsnews.databinding.ItemTopheadBinding
 import com.example.whatsnews.model.Article
+import com.example.whatsnews.util.Ext
 import kotlinx.android.synthetic.main.item_tophead.view.*
 
 
-class TopHeadlinesAdapter(val data: MutableList<Article>) : RecyclerView.Adapter<TopHeadlinesAdapter.ViewHolder>() {
+class TopHeadlinesAdapter(val data: MutableList<Article>, val listener: DataChanged) :
+    RecyclerView.Adapter<TopHeadlinesAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemTopheadBinding =
             DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_tophead, parent, false)
@@ -26,10 +28,9 @@ class TopHeadlinesAdapter(val data: MutableList<Article>) : RecyclerView.Adapter
     }
 
     fun addData(list: List<Article>) {
+
         data.addAll(list)
-
         notifyItemRangeInserted(0, list.size)
-
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -39,7 +40,7 @@ class TopHeadlinesAdapter(val data: MutableList<Article>) : RecyclerView.Adapter
     inner class ViewHolder(private val binding: ItemTopheadBinding) : RecyclerView.ViewHolder(binding.root) {
         fun initView(article: Article) {
             binding.article = article
-            binding.setVariable(BR.article,article)
+            binding.setVariable(BR.article, article)
             binding.executePendingBindings()
             Glide.with(itemView).load(article.urlToImage).into(itemView.itemView)
             itemView.setOnClickListener {

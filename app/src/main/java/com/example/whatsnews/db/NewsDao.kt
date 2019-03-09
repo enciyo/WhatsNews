@@ -3,6 +3,7 @@ package com.example.whatsnews.db
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.room.*
+import com.example.whatsnews.model.Article
 import com.example.whatsnews.model.EverythingModel
 import com.example.whatsnews.model.TopHeadlineModel
 
@@ -12,7 +13,8 @@ interface NewsDao{
     @Query("SELECT * FROM News")
     fun getTopHeadlines() : LiveData<TopHeadlineModel>
 
-    @Insert
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(data:TopHeadlineModel)
 
     @Update
