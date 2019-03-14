@@ -12,43 +12,45 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
 >
+
     <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:id="@+id/nestedScroll"
             android:background="@android:color/black"
             android:layout_height="wrap_content"
             tools:context=".ui.topheadline.TopHeadline" tools:ignore="ScrollViewCount">
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:layout_width="match_parent"
+                                                     android:layout_height="match_parent">
 
-        <LinearLayout
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:id="@+id/recyclerView"
+                tools:listitem="@layout/item_tophead"
+                android:layout_height="wrap_content"/>
+
+        <View android:layout_width="match_parent" android:layout_height="1.2dp"
+              android:layout_margin="4dp"
+              android:background="@android:color/white">
+
+        </View>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recylerView2"
+                tools:listitem="@layout/item_everything"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:id="@+id/recyclerView"
-                    tools:listitem="@layout/item_tophead"
-                    android:layout_height="wrap_content"/>
-            <TextView
-                    android:text="About Turkey"
-                    android:layout_margin="3dp"
-                    android:textColor="@color/textColor"
-                    android:textSize="19dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+
+        </androidx.recyclerview.widget.RecyclerView>
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recylerView2"
-                    tools:listitem="@layout/item_everything"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+    </LinearLayout>
 
-            </androidx.recyclerview.widget.RecyclerView>
-
-
-        </LinearLayout>
-
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     </androidx.core.widget.NestedScrollView>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

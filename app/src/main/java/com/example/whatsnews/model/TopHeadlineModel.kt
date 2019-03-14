@@ -13,8 +13,7 @@ import com.example.whatsnews.db.converters.ArticleConverter
 data class TopHeadlineModel(
     @PrimaryKey(autoGenerate = true)
     var pKey: Int = 0,
-    @get:Bindable
-    var articles:List<Article>,
+    var articles:List<Article> = emptyList(),
     var status: String,
     var totalResults: Int
 ): BaseObservable()

@@ -42,6 +42,8 @@ abstract class NetworkBoundResource<ResultType, RequestType>
         val apiResponse = createCall()
         result.addSource(dbSource) { data ->
             setValue(Resource.loading(data))
+            Ext.i(result.value?.status.toString())
+            removeDb()
         }
         result.addSource(apiResponse) { response ->
             result.removeSource(apiResponse)
@@ -98,6 +100,9 @@ abstract class NetworkBoundResource<ResultType, RequestType>
 
     @WorkerThread
     protected abstract fun saveResult(data: RequestType)
+
+    @WorkerThread
+    protected abstract fun removeDb()
 
     @MainThread
     protected abstract fun shouldFetch(data: ResultType?): Boolean

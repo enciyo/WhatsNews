@@ -24,11 +24,17 @@ class TopHeadlineRepository
 
     fun getTopHeadlines(): LiveData<Resource<TopHeadlineModel>> {
         return object : NetworkBoundResource<TopHeadlineModel, TopHeadlineModel>(appExecutors) {
+            override fun removeDb() {
+                dao.deleteAll()
+            }
+
             override fun saveResult(data: TopHeadlineModel) {
-                appExecutors.diskIO().execute {
-                    Ext.i("Saved")
-                    dao.insert(data)
+
+                    appExecutors.diskIO().execute {
+                        Ext.i("Worked Insert")
+                        dao.insert(data)
                 }
+
             }
 
             override fun shouldFetch(data: TopHeadlineModel?): Boolean {

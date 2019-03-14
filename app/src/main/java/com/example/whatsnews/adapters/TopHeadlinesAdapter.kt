@@ -15,7 +15,7 @@ import com.example.whatsnews.util.Ext
 import kotlinx.android.synthetic.main.item_tophead.view.*
 
 
-class TopHeadlinesAdapter(val data: MutableList<Article>, val listener: DataChanged) :
+class TopHeadlinesAdapter(val data: MutableList<Article>) :
     RecyclerView.Adapter<TopHeadlinesAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemTopheadBinding =
@@ -28,9 +28,10 @@ class TopHeadlinesAdapter(val data: MutableList<Article>, val listener: DataChan
     }
 
     fun addData(list: List<Article>) {
-
+        Ext.i("Data: " + list.toString())
         data.addAll(list)
-        notifyItemRangeInserted(0, list.size)
+        notifyItemRangeInserted(list.size - list.size - 1, list.size)
+
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

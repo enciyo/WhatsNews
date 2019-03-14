@@ -23,15 +23,20 @@ class EverythingRepository @Inject constructor(private val service: ApiService,p
     private val rateLimiter = RateLimiter<String>(3,TimeUnit.SECONDS)
     fun getEverything() : LiveData<Resource<EverythingModel>> {
         return object : NetworkBoundResource<EverythingModel,EverythingModel>(appExecutors){
+            override fun removeDb() {
+                dao.deletAll()
+            }
+
             override fun createCall(): LiveData<ApiResponse<EverythingModel>> {
-                return service.getEverything(Ext.API_KEY,"spor","tr")
+                return service.getEverything(Ext.API_KEY,"son","tr")
             }
 
             override fun saveResult(data: EverythingModel) {
-                appExecutors.diskIO().execute {
-                    dao.insert(data)
-                    Ext.i("Saved")
-                }
+                   appExecutors.diskIO().execute {
+                       dao.insert(data)
+                       Ext.i("Saved")
+               }
+
             }
 
             override fun shouldFetch(data: EverythingModel?): Boolean {

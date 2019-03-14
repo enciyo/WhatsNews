@@ -10,14 +10,19 @@ import com.example.whatsnews.model.TopHeadlineModel
 @Dao
 interface NewsDao{
 
-    @Query("SELECT * FROM News")
+    @Query("SELECT * FROM News order by pKey DESC")
     fun getTopHeadlines() : LiveData<TopHeadlineModel>
 
+    @Query("SELECT * FROM News order by pKey DESC")
+    fun getForCheck() : TopHeadlineModel
+
+    @Query("DELETE FROM News")
+    fun deleteAll()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(data:TopHeadlineModel)
 
-    @Update
-    fun update(data:TopHeadlineModel)
+    @Delete
+    fun delete(data:TopHeadlineModel)
 
 }

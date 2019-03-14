@@ -9,6 +9,7 @@ import com.example.whatsnews.model.TopHeadlineModel
 import com.example.whatsnews.repository.EverythingRepository
 import com.example.whatsnews.repository.TopHeadlineRepository
 import com.example.whatsnews.vo.Resource
+import com.example.whatsnews.vo.Status
 import javax.inject.Inject
 
 class TopHeadlineViewModel @Inject constructor(
@@ -16,13 +17,10 @@ class TopHeadlineViewModel @Inject constructor(
     private val everythingRepository: EverythingRepository
 ) : ViewModel() {
 
-    val getTopHeadline = Transformations.switchMap(topHeadlineRepository.getTopHeadlines()){
-        topHeadlineRepository.getTopHeadlines()
-    }
 
-    val getEverything= Transformations.switchMap(everythingRepository.getEverything()){
-        everythingRepository.getEverything()
-    }
+    val getTopHeadline = topHeadlineRepository.getTopHeadlines()
+
+    val getEverything = everythingRepository.getEverything()
 
 
 }

@@ -1,7 +1,9 @@
 package com.example.whatsnews.model
 
 import androidx.room.Embedded
+import androidx.room.Entity
 import androidx.room.Ignore
+import androidx.room.PrimaryKey
 
 
 data class Article(

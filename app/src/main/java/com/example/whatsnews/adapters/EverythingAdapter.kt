@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.item_everything.view.*
 import kotlinx.android.synthetic.main.item_tophead.view.*
 
 
-class EverythingAdapter(val data: MutableList<Article>, val listener: DataChanged) :
+class EverythingAdapter(val data: MutableList<Article>) :
     RecyclerView.Adapter<EverythingAdapter.ViewHolder>() {
 
 

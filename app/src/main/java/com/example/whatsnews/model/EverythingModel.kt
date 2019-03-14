@@ -13,7 +13,7 @@ import com.google.gson.annotations.SerializedName
 class EverythingModel(
     @PrimaryKey(autoGenerate = true)
     var pKey: Int = 0,
-    var articles: List<Article>,
+    var articles: List<Article> = emptyList(),
     var status: String,
     var totalResults: Int
 )
